@@ -24,11 +24,11 @@ public class ModelTranslator : Profile
 
         _ = CreateMap<CreateWorkloadRequest, Workload>();
         _ = CreateMap<UpdateWorkloadRequest, Workload>();
-        _ = CreateMap<Workload, WorkloadResponse>()
-            .ForCtorParam("Id", b => b.MapFrom(p => p.Id))
-            .ForCtorParam("Start", b => b.MapFrom(p => p.Start))
-            .ForCtorParam("Stop", b => b.MapFrom(p => p.Stop))
-            .ForCtorParam("PersonId", b => b.MapFrom(p => p.PersonId))
-            .ForCtorParam("AssignmentId,", b => b.MapFrom(p => p.AssignmentId));
+        //_ = CreateMap<Workload, WorkloadResponse>()
+        //    .ForCtorParam("Id", b => b.MapFrom(p => p.Id))
+        //    .ForCtorParam("Start", b => b.MapFrom(p => p.Start))
+        //    .ForCtorParam("Stop", b => b.MapFrom(p => p.Stop))
+        //    .ForCtorParam("PersonId", b => b.MapFrom(p => p.PersonId))
+        //    .ForCtorParam("AssignmentId,", b => b.MapFrom(p => p.AssignmentId));
     }
 }

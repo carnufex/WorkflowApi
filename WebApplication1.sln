@@ -5,15 +5,23 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App1", "App1\App1.csproj", "{1A6A90B3-9DCB-441E-9EA4-011A7CB37126}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1.Contracts", "App1.Contracts\App1.Contracts.csproj", "{D6005DE8-1EF1-4E41-B044-6091107E4DB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App1.Contracts", "App1.Contracts\App1.Contracts.csproj", "{D6005DE8-1EF1-4E41-B044-6091107E4DB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1.Mediators", "App1.Mediators\App1.Mediators.csproj", "{7DDC0510-BB12-4AE8-BF41-7E2A7AB014E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App1.Mediators", "App1.Mediators\App1.Mediators.csproj", "{7DDC0510-BB12-4AE8-BF41-7E2A7AB014E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1.Data", "App1.Data\App1.Data.csproj", "{98EF3F8B-D2B4-4B36-AA52-55DE0B303ABC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App1.Data", "App1.Data\App1.Data.csproj", "{98EF3F8B-D2B4-4B36-AA52-55DE0B303ABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1.Model", "App1.Model\App1.Model.csproj", "{649DD410-708C-4822-9E48-FF7FA6061C49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App1.Model", "App1.Model\App1.Model.csproj", "{649DD410-708C-4822-9E48-FF7FA6061C49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkloadsApi", "WorkloadsApi\WorkloadsApi.csproj", "{8B764D45-02F1-4E98-B174-EBC89FF35BC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkloadsApi", "WorkloadsApi\WorkloadsApi.csproj", "{8B764D45-02F1-4E98-B174-EBC89FF35BC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D53D93A8-6E87-4EC7-A722-69F8A7AE023D}"
+	ProjectSection(SolutionItems) = preProject
+		AzureLogin.ps1 = AzureLogin.ps1
+		SetupKeyVault.ps1 = SetupKeyVault.ps1
+		SetupSql.ps1 = SetupSql.ps1
+		SetupWebApi.ps1 = SetupWebApi.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

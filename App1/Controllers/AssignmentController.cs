@@ -41,9 +41,11 @@ public class AssignmentController : CQRSControllerBase
         return await CallMediator(request);
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeleteAssignmentAsync([FromBody] DeleteAssignmentRequest request)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAssignmentAsync(int id)
     {
+        DeleteAssignmentRequest request = new(id);
+
         return await CallMediator(request);
     }
 }

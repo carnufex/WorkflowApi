@@ -41,9 +41,11 @@ public class WorkloadController : CQRSControllerBase
         return await CallMediator(request);
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeleteWorkloadAsync([FromBody] DeleteWorkloadRequest request)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteWorkloadAsync(int id)
     {
+        DeleteWorkloadRequest request = new(id);
+
         return await CallMediator(request);
     }
 }

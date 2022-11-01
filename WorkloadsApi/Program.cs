@@ -1,22 +1,23 @@
+using App1;
 using App1.Controllers;
 using App1.Data;
 using App1.Data.Abstract;
 using App1.Mediators;
 
-using MediatR;
-
-using Microsoft.EntityFrameworkCore;
+using Azure.Identity;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAutoMapper(typeof(ModelTranslator));
-builder.Services.AddMediatR(typeof(PersonMediator).Assembly);
-builder.Services.AddDbContext<IWorkloadsContext, WorkloadContext>(optionsBuilder =>
+builder.Services.AddStatusList();
+string keyVaultUrl = builder.Configuration["AzureKeyVault:Uri"];
+if (!builder.Environment.IsDevelopment())
 {
-    optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("MyWorkloads"));
-});
-builder.Services.AddTransient<IWorkloadService, WorkloadService>();
+    _ = builder.Configuration.AddAzureKeyVault(new Uri(keyVaultUrl), new DefaultAzureCredential());
+}
+
+builder.Services.AddMediatorStuff();
+builder.Services.AddDbStuff(config => config.GetConnectionString("MyWorkloads"));
 
 builder.Services.AddControllers().AddApplicationPart(typeof(PersonController).Assembly);
 
@@ -34,9 +35,9 @@ using (IServiceScope scope = app.Services.CreateScope())
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
+_ = app.UseSwagger();
+_ = app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

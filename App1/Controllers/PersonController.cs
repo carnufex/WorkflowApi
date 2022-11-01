@@ -12,8 +12,13 @@ using Microsoft.Extensions.Logging;
 [Route("[controller]/[action]")]
 public class PersonController : CQRSControllerBase
 {
-    public PersonController(ILogger<PersonController> logger, IMediator mediator)
-        : base(logger, mediator) { }
+    private readonly StatusList status;
+
+    public PersonController(ILogger<PersonController> logger, IMediator mediator, StatusList status)
+        : base(logger, mediator)
+    {
+        this.status = status;
+    }
 
     [HttpGet]
     public async Task<IActionResult> GetPeople()
@@ -34,6 +39,7 @@ public class PersonController : CQRSControllerBase
     [HttpPost]
     public async Task<IActionResult> AddPersonAsync([FromBody] CreatePersonRequest request)
     {
+        status.CurrentStatus.Add("Adding person");
         return await CallMediator(request);
     }
 
@@ -43,9 +49,11 @@ public class PersonController : CQRSControllerBase
         return await CallMediator(request);
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> DeletePersonAsync([FromBody] DeletePersonRequest request)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletePersonAsync(int id)
     {
+        DeletePersonRequest request = new(id);
+
         return await CallMediator(request);
     }
 }
