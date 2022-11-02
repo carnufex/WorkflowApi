@@ -31,9 +31,12 @@ public class WorkloadService : IWorkloadService
         return person.Id == 0 ? throw new PersonNotSavedException("User not saved") : person;
     }
 
-    public Task<Person> UpdatePerson(Person person)
+    public async Task<Person> UpdatePerson(Person person)
     {
-        throw new PersonNotFoundException("Person not found");
+        _ = context.People.Update(person);
+        _ = await context.SaveChangesAsync();
+
+        return person.Id == 0 ? throw new PersonNotFoundException("User not updated") : person;
     }
 
     public Task<Person> DeletePerson(int id)
