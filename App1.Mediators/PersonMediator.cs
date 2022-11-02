@@ -32,14 +32,31 @@ public class PersonMediator : IRequestHandler<GetPeopleRequest, MediatorResponse
         this.mapper = mapper;
     }
 
-    public Task<MediatorResponse> Handle(GetPersonRequest request, CancellationToken cancellationToken)
+    public async Task<MediatorResponse> Handle(GetPersonRequest request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Person person = await service.GetPerson(request.Id);
+            return new MediatorResponse { Status = 200, Result = mapper.Map<PersonResponse>(person) };
+        }
+        catch (PersonNotFoundException ex)
+        {
+            return new MediatorResponse { Status = 404, Result = new ErrorDetails { Message = ex.Message } };
+        }
     }
 
-    public Task<MediatorResponse> Handle(GetPeopleRequest request, CancellationToken cancellationToken)
+    public async Task<MediatorResponse> Handle(GetPeopleRequest request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        try
+        {
+            IEnumerable<Person> people = await service.GetPeople();
+
+            return new MediatorResponse { Status = 200, Result = people };
+        }
+        catch (Exception ex)
+        {
+			return new MediatorResponse { Status = 400, Result = new ErrorDetails { Message = ex.Message } };
+		}
     }
 
     public async Task<MediatorResponse> Handle(CreatePersonRequest request, CancellationToken cancellationToken)
@@ -70,8 +87,17 @@ public class PersonMediator : IRequestHandler<GetPeopleRequest, MediatorResponse
         }
     }
 
-    public Task<MediatorResponse> Handle(DeletePersonRequest request, CancellationToken cancellationToken)
+    public async Task<MediatorResponse> Handle(DeletePersonRequest request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Person person = await service.DeletePerson(request.Id);
+
+            return new MediatorResponse { Status = 200, Result = mapper.Map<PersonResponse>(person) };
+        }
+        catch (PersonNotFoundException ex)
+        {
+            return new MediatorResponse { Status = 404, Result = new ErrorDetails { Message = ex.Message } };
+        }
     }
 }

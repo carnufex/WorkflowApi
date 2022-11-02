@@ -11,6 +11,6 @@ public class Workload
     public int AssignmentId { get; set; }
 
     //Browsing properties
-    public Person Person { get; set; }
-    public Assignment Assignment { get; set; }
+    public Person? Person { get; set; }
+    public Assignment? Assignment { get; set; }
 }
