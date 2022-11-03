@@ -13,9 +13,9 @@ public class WorkloadService : IWorkloadService
         this.context = context;
     }
 
-    public async Task<Person> GetPerson(int id)
+    public Task<Person> GetPerson(int id)
     {
-        Person? person = context.People.Where(x => x.Id == id).FirstOrDefault();
+        Person? person = context.People.FirstOrDefault();
 
         if (person == null || person.Id == 0)
         {
@@ -23,14 +23,14 @@ public class WorkloadService : IWorkloadService
         }
         else
         {
-            return await Task.Run(() => person); 
+            return Task.FromResult(person); 
         }
     }
 
-    public async Task<IEnumerable<Person>> GetPeople()
+    public Task<IEnumerable<Person>> GetPeople()
     {
-        var people = context.People.Where(x => x.Id > 0);
-        return await Task.Run(() => people);
+        var people = context.People.AsEnumerable();
+        return Task.FromResult(people);
     }
 
     public async Task<Person> AddPerson(Person person)
